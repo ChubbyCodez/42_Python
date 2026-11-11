@@ -184,7 +184,7 @@ class Seed(Flower):
 
 
 class Tree(Plant):
-    class _Shade_Stats(Plant._Stats):
+    class _ShadeStats(Plant._Stats):
         def __init__(self) -> None:
             super().__init__()
             self._stat_shade: int = 0
@@ -194,7 +194,7 @@ class Tree(Plant):
 
         def display_stats(self) -> None:
             super().display_stats()
-            print(f"{self._stat_shade} shade")
+            print(f" {self._stat_shade} shade")
 
     def __init__(
         self,
@@ -206,13 +206,11 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, age, rate)
         self._trunk_diameter = trunk
-        self._shade: bool = False
-        self._counter = self._Shade_Stats()
+        self._counter: Tree._ShadeStats = self._ShadeStats()
 
     def produce_shade(self) -> None:
         self._counter.shade_call()
-        if not self._shade:
-            print(f"[asking the {self._name.lower()} to produce shade]")
+        print(f"[asking the {self._name.lower()} to produce shade]")
         print(f"Tree {self._name} now produces a shade of {self._height:.1f}"
               f"cm long and {self._trunk_diameter:.1f}cm wide.")
 
@@ -255,9 +253,9 @@ class Vegetable(Plant):
         print(f" Nutritional value: {self._nutritional_value}")
 
 
-def display_statistics(plants: Plant) -> None:
-    print(f"[statistics for {plants.get_name()}]")
-    plants.show_stats()
+def display_statistics(plant: Plant) -> None:
+    print(f"[statistics for {plant.get_name()}]")
+    plant.show_stats()
 
 
 def ft_garden_analytics() -> None:
