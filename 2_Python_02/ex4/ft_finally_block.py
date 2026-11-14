@@ -47,7 +47,7 @@ def test_watering_system() -> None:
             water_plant(i)
             print(f"Watering {i}: [OK]")
     except PlantError as e:
-        print(f"{e}\n.. ending test and returning to main")
+        print(f"{e}\n.. ending tests and returning to main")
     finally:
         print("Closing watering system")
     print("\nCleanup always happens, even with errors!")
