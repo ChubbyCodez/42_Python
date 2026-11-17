@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 
 def input_temperature(temp_str: str) -> int:
-    temp_int: int = 0
-    print(f"Input data is '{temp_str}'")
-    try:
-        temp_int = int(temp_str)
-        print(f"Temperature is now {temp_int}°C")
-    except ValueError as e:
-        print(f"Caught input_temperature error: {e}")
-    print("")
-    return temp_int
+    if not temp_str.isnumeric():
+        raise ValueError(int(temp_str))
+    return int(temp_str)
 
 
 def test_temperature() -> None:
-    print("=== Garden Temperature ===\n")
-    input_temperature("25")
-    input_temperature("abc")
-    print("All tests completed - program didn't crash!")
+    print("=== Garden Temperature ===")
+    for i in ("25", "abc"):
+        print(f"\nInput data is '{i}'")
+        try:
+            input_temperature(i)
+            print(f"Temperature is now {i}°C")
+        except ValueError as e:
+            print(f"Caught input_temperature error: {e}")
+    print("\nAll tests completed - program didn't crash!")
 
 
 if __name__ == "__main__":

@@ -2,31 +2,27 @@
 
 def garden_operations(operation_number: int) -> None:
     dir: str = "/non/existent/file"
-    print(f"Testing operation {operation_number}...")
-    try:
-        if operation_number == 0:
-            print(int(dir))
-        elif operation_number == 1:
-            print(1 / 0)
-        elif operation_number == 2:
-            print(open(dir, 'r'))
-        elif operation_number == 3:
-            dir += 1
-        print("Operation completed successfully")
-    except (ValueError, ZeroDivisionError,
-            FileNotFoundError, TypeError) as e:
-        print(f"Caught {e.__class__.__name__}: {e}")
-    except Exception:
-        return
+    if operation_number == 0:
+        raise ValueError(int("abc"))
+    elif operation_number == 1:
+        raise ZeroDivisionError(1 / 0)
+    elif operation_number == 2:
+        raise FileNotFoundError(open(dir, 'r'))
+    elif operation_number == 3:
+        raise TypeError(dir + 1)
+    return
 
 
 def test_error_types() -> None:
     print("=== Garden Error Types Demo ===")
-    garden_operations(0)
-    garden_operations(1)
-    garden_operations(2)
-    garden_operations(3)
-    garden_operations(4)
+    for i in range(0, 5):
+        try:
+            print(f"Testing operation {i}...")
+            garden_operations(i)
+            print("Operation completed successfully")
+        except (ValueError, ZeroDivisionError,
+                FileNotFoundError, TypeError) as e:
+            print(f"Caught {e.__class__.__name__}: {e}")
     print("\nAll error types tested successfully!")
 
 

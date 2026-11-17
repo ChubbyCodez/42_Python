@@ -10,14 +10,8 @@ class GardenError(Exception):
 
 
 class PlantError(GardenError):
-    def __init__(self, plant: str = "tomato") -> None:
-        super().__init__()
-        self._plant = ""
-        self._set_plant(plant)
-        self._message = f"Invalid plant name to water: '{self._plant}'"
-
-    def _set_plant(self, plant: str) -> None:
-        self._plant = plant
+    def __init__(self, message: str = "Unknown plant error") -> None:
+        super().__init__(message)
 
     def __str__(self) -> str:
         return super().__str__()
@@ -25,7 +19,7 @@ class PlantError(GardenError):
 
 def water_plant(plant_name: str) -> None:
     if plant_name != plant_name.capitalize():
-        raise PlantError(plant_name)
+        raise PlantError(f"Invalid plant name to water: '{plant_name}'")
 
 
 def test_watering_system() -> None:
